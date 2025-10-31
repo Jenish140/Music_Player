@@ -1,4 +1,6 @@
+================================
 Neumorphic Music Player Project
+================================
 
 Project Title: Neumorphic Music Player
 Technologies: HTML, CSS, JavaScript
