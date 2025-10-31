@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+:root {
+    --primary-color: #e0e0e0;
+    --bg-color: #2c3e50; /* Dark blue-grey background */
+    --shadow-dark: #22303e;
+    --shadow-light: #364c62;
+    --accent-color: #2980b9;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.player-container {
+    background-color: var(--bg-color);
+    border-radius: 25px;
+    padding: 25px 35px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 10px 10px 20px var(--shadow-dark),
+                -10px -10px 20px var(--shadow-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Album Art */
+.img-container {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin-bottom: 25px;
+    position: relative;
+    
+    /* Neumorphic "raised" effect */
+    box-shadow: 8px 8px 15px var(--shadow-dark),
+                -8px -8px 15px var(--shadow-light);
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    
+    /* Animation setup */
+    animation: rotate 10s linear infinite;
+    animation-play-state: paused; /* Paused by default */
+}
+
+/* Add 'playing' class with JS to start animation */
+.player-container.playing .img-container img {
+    animation-play-state: running;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Song Details */
+#title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+#artist {
+    font-size: 14px;
+    font-weight: 400;
+    color: #bdc3c7;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Progress Bar */
+.progress-container {
+    background: var(--bg-color);
+    border-radius: 25px;
+    cursor: pointer;
+    height: 10px;
+    width: 100%;
+    margin-bottom: 30px;
+    
+    /* Neumorphic "inset" or "groove" effect */
+    box-shadow: inset 5px 5px 10px var(--shadow-dark),
+                inset -5px -5px 10px var(--shadow-light);
+}
+
+.progress-bar {
+    background-color: var(--accent-color);
+    border-radius: 25px;
+    height: 100%;
+    width: 0%; /* Changed by JS */
+    transition: width 0.1s linear;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.control-btn {
+    background-color: var(--bg-color);
+    border: 0;
+    border-radius: 50%;
+    color: var(--primary-color);
+    font-size: 18px;
+    width: 60px;
+    height: 60px;
+    margin: 0 15px;
+    cursor: pointer;
+    
+    /* Raised effect */
+    box-shadow: 8px 8px 15px var(--shadow-dark),
+                -8px -8px 15px var(--shadow-light);
+    transition: all 0.2s ease;
+}
+
+.control-btn.play-btn {
+    width: 70px;
+    height: 70px;
+    font-size: 22px;
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.control-btn:active {
+    /* "Pressed" effect */
+    box-shadow: inset 5px 5px 10px var(--shadow-dark),
+                inset -5px -5px 10px var(--shadow-light);
+    transform: translateY(0);
+}
+
+.control-btn:focus {
+    outline: 0;
+}
+
+/* Volume Control */
+.volume-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 250px;
+    color: #bdc3c7;
+}
+
+.volume-container i {
+    margin: 0 10px;
+}
+
+.volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: var(--bg-color); /* Track background */
+    outline: none;
+    border-radius: 5px;
+    
+    /* Inset shadow for the track */
+    box-shadow: inset 3px 3px 6px var(--shadow-dark),
+                inset -3px -3px 6px var(--shadow-light);
+}
+
+/* Webkit (Chrome, Safari) */
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    box-shadow: 2px 2px 4px var(--shadow-dark),
+                -2px -2px 4px var(--shadow-light);
+    transition: background 0.2s ease;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+    background: var(--accent-color);
+}
+
+/* Firefox */
+.volume-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    border: 0;
+    box-shadow: 2px 2px 4px var(--shadow-dark),
+                -2px -2px 4px var(--shadow-light);
+    transition: background 0.2s ease;
+}
+
+.volume-slider::-moz-range-thumb:hover {
+    background: var(--accent-color);
+}
+
+.volume-slider::-moz-range-track {
+    background: transparent; /* Handled by the main .volume-slider style */
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .player-container {
+        padding: 20px;
+    }
+
+    .img-container {
+        width: 150px;
+        height: 150px;
+    }
+
+    .control-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 16px;
+        margin: 0 10px;
+    }
+
+    .control-btn.play-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 20px;
+    }
+}
